@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: nlp_bi_mamba_app
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - ENV=development
+    restart: unless-stopped
