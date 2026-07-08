@@ -17,7 +17,7 @@ De acuerdo con las directrices de evaluación del examen final para asegurar el 
 
 ---
 
-## 🚀 Ejecución y Reproducibilidad con Docker
+##  Ejecución y Reproducibilidad con Docker
 
 El proyecto está contenerizado para garantizar que se ejecute en idénticas condiciones (CPU/GPU) en cualquier sistema operativo.
 
@@ -46,7 +46,7 @@ El proyecto está contenerizado para garantizar que se ejecute en idénticas con
 
 ---
 
-## 📂 Estructura del Repositorio
+##  Estructura del Repositorio
 
 * **`notebooks/`**: Cuadernos interactivos de desarrollo de modelos y datos.
   * [creacion_dataset.ipynb](file:///Users/cesar/Desktop/NLP%20EF/notebooks/creacion_dataset.ipynb): Simulación del dataset IIoT y métodos de imputación.
