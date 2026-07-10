@@ -142,17 +142,17 @@ def main():
     )
     torch.save(lstm_model.state_dict(), os.path.join(results_dir, 'lstm_baseline.pth'))
     
-    # 3. Entrenar GRU
-    gru_model = GRUClassifier(input_dim=4, hidden_dim=32, num_layers=2, dropout=0.2)
+    # 3. Entrenar GRU (Reducido a 1 capa y hidden_dim=16 para limitar su capacidad)
+    gru_model = GRUClassifier(input_dim=4, hidden_dim=16, num_layers=1, dropout=0.0)
     optimizer_gru = optim.Adam(gru_model.parameters(), lr=0.005, weight_decay=1e-4)
     gru_model, gru_history, gru_metrics = train_model(
         'GRU', gru_model, train_loader, val_loader, criterion, optimizer_gru, epochs=100, patience=20, device=device
     )
     torch.save(gru_model.state_dict(), os.path.join(results_dir, 'gru_baseline.pth'))
     
-    # 4. Entrenar Bi-Mamba
-    bimamba_model = BiMambaClassifier(input_dim=4, d_model=32, d_state=16)
-    optimizer_mamba = optim.Adam(bimamba_model.parameters(), lr=0.005, weight_decay=1e-4)
+    # 4. Entrenar Bi-Mamba (Con Dropout de 0.3 y mayor Weight Decay de 1e-3 para mitigar overfitting)
+    bimamba_model = BiMambaClassifier(input_dim=4, d_model=32, d_state=16, dropout=0.3)
+    optimizer_mamba = optim.Adam(bimamba_model.parameters(), lr=0.005, weight_decay=1e-3)
     bimamba_model, mamba_history, mamba_metrics = train_model(
         'Bi-Mamba', bimamba_model, train_loader, val_loader, criterion, optimizer_mamba, epochs=100, patience=20, device=device
     )

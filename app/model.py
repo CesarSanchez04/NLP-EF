@@ -132,7 +132,7 @@ class MambaSSMLayer(nn.Module):
 
 
 class BiMambaClassifier(nn.Module):
-    def __init__(self, input_dim=4, d_model=32, d_state=16):
+    def __init__(self, input_dim=4, d_model=32, d_state=16, dropout=0.3):
         super().__init__()
         self.fc_in = nn.Linear(input_dim, d_model)
         
@@ -140,6 +140,7 @@ class BiMambaClassifier(nn.Module):
         self.mamba_fwd = MambaSSMLayer(d_model=d_model, d_state=d_state)
         self.mamba_bwd = MambaSSMLayer(d_model=d_model, d_state=d_state)
         
+        self.dropout = nn.Dropout(dropout)
         self.fc_out = nn.Linear(2 * d_model, 1)
         self.sigmoid = nn.Sigmoid()
         
@@ -165,6 +166,9 @@ class BiMambaClassifier(nn.Module):
         
         # Pooling temporal
         pooled = torch.mean(merged, dim=1)  # (batch_size, 2 * d_model)
+        
+        # Regularización por Dropout
+        pooled = self.dropout(pooled)
         
         # Clasificación
         logits = self.fc_out(pooled)
