@@ -6,7 +6,7 @@ El sistema implementa un clasificador de series temporales de sensores industria
 
 ---
 
-## 🚀 Guía de Reproducción de Experimentos
+## Guía de Reproducción de Experimentos
 
 El proyecto puede ser reproducido de dos formas: localmente o utilizando contenedores de Docker.
 
@@ -50,7 +50,7 @@ El proyecto está contenerizado para garantizar que se ejecute en idénticas con
 
 ---
 
-## 📊 Resultados Experimentales
+## Resultados Experimentales
 
 Evaluación comparativa de los modelos entrenados con semilla fija `42` en el conjunto de validación (30% del dataset):
 
@@ -65,13 +65,13 @@ La variante propuesta **Bi-Mamba** superó a ambos baselines, alcanzando el F1-S
 
 ---
 
-## 🎬 Evidencia y Defensa Técnica
+## Evidencia y Defensa Técnica
 *   **Video de Exposición del Proyecto (más de 10 minutos):** [Enlace al Video de Defensa](COLOQUE_EL_ENLACE_AQUI) *(Reemplace este marcador por el enlace final de YouTube/Drive)*
 *   **Explicación Teórica Detallada:** Consulta el archivo de documentación técnica [docs/informe_tecnico.md](file:///Users/cesar/Desktop/NLP%20EF/docs/informe_tecnico.md) para comprender la formulación matemática de la discretización del espacio de estados y análisis de limitaciones.
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 *   [generate_dataset.py](file:///Users/cesar/Desktop/NLP%20EF/generate_dataset.py): Script de simulación física del dataset IIoT.
 *   [train_models.py](file:///Users/cesar/Desktop/NLP%20EF/train_models.py): Script de entrenamiento comparativo y guardado de resultados.

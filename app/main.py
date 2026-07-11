@@ -21,7 +21,6 @@ sns.set_theme(style="whitegrid")
 # Configuración de página de Streamlit
 st.set_page_config(
     page_title="Bi-Mamba IIoT Fault Detector",
-    page_icon="🏭",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -124,11 +123,11 @@ except Exception as e:
     st.stop()
 
 # Header
-st.markdown("<h1 class='main-title'>🏭 Plataforma Bi-Mamba para Telemetría IIoT</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'>Plataforma Bi-Mamba para Telemetría IIoT</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>Detección Tolerante a Fallos en Sensores con Muestreo Temporal Irregular y Pérdida de Datos</p>", unsafe_allow_html=True)
 
 # Sidebar de Controles de Simulación
-st.sidebar.header("🛠️ Configuración de Simulación")
+st.sidebar.header("Configuración de Simulación")
 
 anomaly_map = {
     "Operación Normal": None,
@@ -161,7 +160,7 @@ noise_level = st.sidebar.slider(
     format="%.2f"
 )
 
-btn_simulate = st.sidebar.button("⚙️ Simular Nueva Secuencia")
+btn_simulate = st.sidebar.button("Simular Nueva Secuencia")
 
 # Inicializar estado para la simulación
 if 'sim_df_raw' not in st.session_state or btn_simulate:
@@ -247,7 +246,7 @@ with col_metrics[2]:
     badge_class = "badge-falla" if prob_mamba >= 0.5 else "badge-normal"
     st.markdown(f"""
     <div class='card'>
-        <div class='model-name' style='color:#6D28D9;'>🚀 Bi-Mamba (Propuesto)</div>
+        <div class='model-name' style='color:#6D28D9;'>Bi-Mamba (Propuesto)</div>
         <div class='{badge_class}'>{label_text}</div>
         <div class='metric-value' style='color:#6D28D9;'>{prob_mamba:.2%}</div>
         <div class='metric-label'>Probabilidad de Anomalía</div>
@@ -260,7 +259,7 @@ st.info(f"**Estado Físico Real de la Secuencia Simulación:** {desc_real} (Etiq
 
 
 # ----------------- DIBUJAR GRÁFICOS DE TELEMETRÍA -----------------
-st.markdown("### 📊 Señales de Sensores e Imputación de Pérdida de Datos")
+st.markdown("### Señales de Sensores e Imputación de Pérdida de Datos")
 
 fig, axes = plt.subplots(3, 1, figsize=(15, 10), sharex=True)
 
@@ -301,7 +300,7 @@ st.pyplot(fig)
 
 
 # ----------------- DIAGNÓSTICO FÍSICO -----------------
-st.markdown("### 💡 Diagnóstico del Sistema y Análisis de Evidencia")
+st.markdown("### Diagnóstico del Sistema y Análisis de Evidencia")
 
 # Identificar qué sensor causó la anomalía conceptualmente
 max_temp = df_imputed['sensor_temp'].max()
@@ -318,7 +317,7 @@ elif anomaly_type == 'leak':
 
 st.markdown(f"""
 <div class='card' style='background-color:#F3F4F6;'>
-    <h4>🔍 Análisis de Evidencia de Sensores:</h4>
+    <h4>Análisis de Evidencia de Sensores:</h4>
     <p style='font-size:1.05rem; color:#374151;'>{evidencia_falla}</p>
     <p style='font-size:0.9rem; color:#6B7280;'><b>Comparación Operacional:</b> El modelo Bi-Mamba es capaz de clasificar de forma tolerante a fallos porque no asume un muestreo temporal constante, utilizando delta_t físico como parámetro dinámico de propagación de estado.</p>
 </div>

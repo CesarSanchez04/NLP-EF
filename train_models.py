@@ -37,7 +37,7 @@ def train_model(model_name, model, train_loader, val_loader, criterion, optimize
             loss = criterion(outputs, labels)
             loss.backward()
             
-            # CAMBIO CRÍTICO: Recorte de gradientes (Gradient Clipping)
+            # Recorte de gradientes (Gradient Clipping)
             # Previene la explosión de gradientes, fundamental para estabilizar Mamba y LSTM
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             
@@ -128,7 +128,7 @@ def main():
     print(f"Entrenando en: {device}")
     
     # 1. Preparar cargadores de datos
-    # CAMBIO CRÍTICO: Batch size de 4 a 32 para estabilizar el cálculo del gradiente
+    # Batch size de 4 a 32 para estabilizar el cálculo del gradiente
     train_loader, val_loader, scaler = prepare_data_loaders(
         csv_path=csv_path,
         batch_size=32, 
@@ -149,7 +149,7 @@ def main():
     torch.save(lstm_model.state_dict(), os.path.join(results_dir, 'lstm_baseline.pth'))
     
     # 3. Entrenar GRU 
-    # CAMBIO CRÍTICO: Se iguala la capacidad (hidden_dim=32, num_layers=2) para una comparativa justa.
+    # Se iguala la capacidad (hidden_dim=32, num_layers=2) para una comparativa justa.
     # El LR se ajusta a un valor estándar de 0.001.
     gru_model = GRUClassifier(input_dim=4, hidden_dim=32, num_layers=2, dropout=0.2)
     optimizer_gru = optim.Adam(gru_model.parameters(), lr=0.001, weight_decay=1e-4)
@@ -159,7 +159,7 @@ def main():
     torch.save(gru_model.state_dict(), os.path.join(results_dir, 'gru_baseline.pth'))
     
     # 4. Entrenar Bi-Mamba 
-    # CAMBIO CRÍTICO: Tasa de aprendizaje reducida severamente (de 0.005 a 5e-4) para evitar la inestabilidad.
+    # Tasa de aprendizaje reducida severamente (de 0.005 a 5e-4) para evitar la inestabilidad.
     bimamba_model = BiMambaClassifier(input_dim=4, d_model=32, d_state=16, dropout=0.3)
     optimizer_mamba = optim.Adam(bimamba_model.parameters(), lr=5e-4, weight_decay=1e-3)
     bimamba_model, mamba_history, mamba_metrics = train_model(
