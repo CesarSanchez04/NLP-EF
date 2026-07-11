@@ -19,7 +19,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Instalar las dependencias de Python
-RUN pip install --default-timeout=1000 --no-cache-dir -r requirements.txt
+RUN pip install --default-timeout=1000 --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
 # Copiar el resto del código de la aplicación al contenedor
 COPY . .
